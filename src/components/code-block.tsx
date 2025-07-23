@@ -3,7 +3,14 @@
 import { Check, Copy } from "lucide-react";
 import React from "react";
 import { Prism } from "react-syntax-highlighter";
-import * as themes from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  oneDark,
+  oneLight,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
+import { useTheme } from "next-themes";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 type CodeBlockProps = {
   code: string;
@@ -11,37 +18,38 @@ type CodeBlockProps = {
 };
 
 export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
-  const [copied, setCopied] = React.useState(false);
-  
+  const [mounted, setMounted] = React.useState(false);
+  const { theme } = useTheme();
+  const { copied, copyToClipboard } = useCopyToClipboard();
 
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy code:", err);
-    }
-  };
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
-    <div className="bg-background p-1 h-full relative">
-      <div className="absolute top-0 right-0 p-1">
-        <button type="button" onClick={copyToClipboard} className="p-1 bg-white">
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-        </button>
+    <div className="bg-background p-1.5 h-full relative">
+      <div className="absolute top-0 right-0 p-1.5">
+        <Button
+          type="button"
+          onClick={() => copyToClipboard(code)}
+          variant="ghost"
+          size="icon"
+        >
+          {copied ? <Check /> : <Copy />}
+        </Button>
       </div>
       <Prism
         language={language}
         showLineNumbers
-        className="not-prose code-preview rounded-lg"
-        style={themes.oneLight}
-        customStyle={{
-          background: "transparent",
-          margin: 0,
-          fontSize: "0.875rem",
-          padding: "1rem",
-        }}
+        className={cn(
+          "not-prose code-preview rounded-lg h-full m-0! text-sm! leading-relaxed!",
+          "[&_.linenumber]:w-12! [&_.linenumber]:pr-6! [&_.linenumber]:not-italic!"
+        )}
+        style={theme === "dark" ? oneDark : oneLight}
         codeTagProps={{ style: { fontFamily: "monospace" } }}
       >
         {code}

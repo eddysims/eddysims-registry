@@ -1,34 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { Check, Copy, Code } from "lucide-react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
-
-import "./code-preview.css";
 import { CodeBlock } from "./code-block";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
-interface CodePreviewProps {
-  children: React.ReactNode;
+type CodePreviewProps = {
   code: string;
-  title?: string;
-}
+};
 
-export function CodePreview({ children, code, title }: CodePreviewProps) {
-  const [showCode, setShowCode] = useState(false);
-  const [copied, setCopied] = useState(false);
-
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy code:", err);
-    }
-  };
-
+export function CodePreview({
+  code,
+  children,
+}: React.PropsWithChildren<CodePreviewProps>) {
   return (
     <Tabs defaultValue="code">
       <TabsList>

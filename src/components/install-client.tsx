@@ -11,7 +11,7 @@ export function InstallClient() {
         <TabsTrigger value="manual">Manual</TabsTrigger>
       </TabsList>
       <TabsContent value="cli">
-        <div>
+        <div className="mt-2">
           <InstallCliBox component="star-rating" />
         </div>
       </TabsContent>

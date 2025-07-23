@@ -29,7 +29,7 @@ export function InstallCliBox({ component }: InstallCliBoxProps) {
   return (
     <div>
       <div className="border rounded-lg overflow-hidden">
-        <div className="px-1 pt-1 rounded-lg flex gap-1">
+        <div className="px-2 pt-1 rounded-lg flex gap-1 items-center">
           <Button
             {...buttonProps}
             onClick={() => setTab("pnpm")}

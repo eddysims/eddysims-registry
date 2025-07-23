@@ -1,5 +1,9 @@
-import { StarRating } from "../components/star-rating"
+import { StarRating } from "@/components/ui/star-rating";
 
 export function Demo() {
-  return <StarRating value={3} readonly />
+  return (
+    <div className="flex items-center justify-center h-full">
+      <StarRating value={3} readonly />
+    </div>
+  );
 }

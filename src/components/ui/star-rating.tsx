@@ -1,0 +1,1 @@
+export * from "@/registry/new-york/star-rating/components/star-rating";

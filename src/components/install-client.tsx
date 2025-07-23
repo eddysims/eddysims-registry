@@ -1,0 +1,23 @@
+"use client";
+
+import { InstallCliBox } from "./install-cli-box";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+
+export function InstallClient() {
+  return (
+    <Tabs defaultValue="cli">
+      <TabsList>
+        <TabsTrigger value="cli">CLI</TabsTrigger>
+        <TabsTrigger value="manual">Manual</TabsTrigger>
+      </TabsList>
+      <TabsContent value="cli">
+        <div>
+          <InstallCliBox component="star-rating" />
+        </div>
+      </TabsContent>
+      <TabsContent value="manual">
+        <div>Manual Install</div>
+      </TabsContent>
+    </Tabs>
+  );
+}

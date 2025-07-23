@@ -15,9 +15,14 @@ import { Button } from "./ui/button";
 type CodeBlockProps = {
   code: string;
   language?: string;
+  hideLineNumbers?: boolean;
 };
 
-export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
+export function CodeBlock({
+  code,
+  language = "tsx",
+  hideLineNumbers = false,
+}: CodeBlockProps) {
   const [mounted, setMounted] = React.useState(false);
   const { theme } = useTheme();
   const { copied, copyToClipboard } = useCopyToClipboard();
@@ -44,7 +49,7 @@ export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
       </div>
       <Prism
         language={language}
-        showLineNumbers
+        showLineNumbers={!hideLineNumbers}
         className={cn(
           "not-prose code-preview rounded-lg h-full m-0! text-sm! leading-relaxed!",
           "[&_.linenumber]:w-12! [&_.linenumber]:pr-6! [&_.linenumber]:not-italic!"

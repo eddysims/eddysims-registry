@@ -12,7 +12,7 @@ export function CodePreview({
   children,
 }: React.PropsWithChildren<CodePreviewProps>) {
   return (
-    <Tabs defaultValue="code">
+    <Tabs defaultValue="preview">
       <TabsList>
         <TabsTrigger value="preview">Preview</TabsTrigger>
         <TabsTrigger value="code">Code</TabsTrigger>

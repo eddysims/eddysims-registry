@@ -1,9 +1,10 @@
 "use client";
 
+import { CodeBlock } from "./code-block";
 import { InstallCliBox } from "./install-cli-box";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
-export function InstallClient() {
+export function InstallClient({code}: {code: string}) {
   return (
     <Tabs defaultValue="cli">
       <TabsList>
@@ -16,7 +17,7 @@ export function InstallClient() {
         </div>
       </TabsContent>
       <TabsContent value="manual">
-        <div>Manual Install</div>
+        <CodeBlock code={code} expandable />
       </TabsContent>
     </Tabs>
   );

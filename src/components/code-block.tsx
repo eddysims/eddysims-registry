@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Copy } from "lucide-react";
+import { Check, ChevronsDownUp, ChevronsUpDown, Copy } from "lucide-react";
 import React from "react";
 import { Prism } from "react-syntax-highlighter";
 import {
@@ -16,14 +16,17 @@ type CodeBlockProps = {
   code: string;
   language?: string;
   hideLineNumbers?: boolean;
+  expandable?: boolean;
 };
 
 export function CodeBlock({
   code,
   language = "tsx",
   hideLineNumbers = false,
+  expandable = false,
 }: CodeBlockProps) {
   const [mounted, setMounted] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(!expandable);
   const { theme } = useTheme();
   const { copied, copyToClipboard } = useCopyToClipboard();
 
@@ -36,13 +39,26 @@ export function CodeBlock({
   }
 
   return (
-    <div className="bg-background p-1.5 h-full relative">
+    <div
+      className={cn("bg-background p-1.5 relative", {
+        "h-120": !expanded,
+        "h-full": expanded,
+        "after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-12 after:bg-gradient-to-t after:from-background after:to-transparent":
+        !expanded,
+      })}
+    >
       <div className="absolute top-0 right-0 p-1.5">
-        <Button
-          type="button"
-          onClick={() => copyToClipboard(code)}
-          variant="ghost"
-          size="icon"
+        {expandable && (
+          <Button variant="ghost" onClick={() => setExpanded(!expanded)} >
+            {expanded ? <ChevronsDownUp /> : <ChevronsUpDown />}
+            {expanded ? "Collapse" : "Expand"}
+          </Button>
+        )}
+          <Button
+            type="button"
+            onClick={() => copyToClipboard(code)}
+            variant="ghost"
+            size="icon"
         >
           {copied ? <Check /> : <Copy />}
         </Button>
@@ -59,6 +75,13 @@ export function CodeBlock({
       >
         {code}
       </Prism>
+      {!expanded && (
+        <div className="relative z-30 flex items-center justify-center -mt-4">
+          <Button variant="outline" onClick={() => setExpanded(true)}>
+            Expand to view full code
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

@@ -10,8 +10,8 @@
       "description": "A customizable star rating component",
       "files": [
         {
-          "path": "registry/default/star-rating/star-rating.tsx",
-          "type": "registry:component"
+          "path": "registry/new-york/star-rating/components/star-rating.tsx",
+          "type": "registry:ui"
         }
       ]
     }

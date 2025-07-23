@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { StarRating } from "@/registry/default/star-rating/star-rating"
+import { StarRating } from "@/registry/new-york/star-rating/components/star-rating"
 
 export function StarRatingDemo() {
   const [rating, setRating] = useState(0)

@@ -10,6 +10,7 @@
     "registry:build": "shadcn build"
   },
   "dependencies": {
+    "@types/react-syntax-highlighter": "^15.5.13",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "fumadocs-core": "15.6.5",
@@ -19,6 +20,7 @@
     "next": "15.4.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-syntax-highlighter": "^15.6.1",
     "shadcn": "2.9.3-canary.0",
     "tailwind-merge": "^3.3.1"
   },

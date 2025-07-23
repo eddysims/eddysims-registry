@@ -8,6 +8,8 @@ interface CodePreviewServerProps {
   functionName: string
   imports?: string[]
   componentName?: string
+  language?: string
+  showLineNumbers?: boolean
 }
 
 export function CodePreviewServer({ 
@@ -16,13 +18,15 @@ export function CodePreviewServer({
   filePath,
   functionName,
   imports = [],
-  componentName
+  componentName,
+  language = "tsx",
+  showLineNumbers = true
 }: CodePreviewServerProps) {
   const functionContent = getExampleSource(filePath, functionName)
   const code = createExampleCode(imports, functionContent, componentName)
   
   return (
-    <CodePreview title={title} code={code}>
+    <CodePreview title={title} code={code} language={language} showLineNumbers={showLineNumbers}>
       {children}
     </CodePreview>
   )

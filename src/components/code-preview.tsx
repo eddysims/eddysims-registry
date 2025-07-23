@@ -1,27 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Check, Copy, Code } from "lucide-react"
+import { useState } from "react";
+import { Check, Copy, Code } from "lucide-react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import "./code-preview.css";
 
 interface CodePreviewProps {
-  children: React.ReactNode
-  code: string
-  title?: string
+  children: React.ReactNode;
+  code: string;
+  title?: string;
 }
 
 export function CodePreview({ children, code, title }: CodePreviewProps) {
-  const [showCode, setShowCode] = useState(false)
-  const [copied, setCopied] = useState(false)
+  const [showCode, setShowCode] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(code)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy code:', err)
+      console.error("Failed to copy code:", err);
     }
-  }
+  };
 
   return (
     <div className="relative rounded-lg border bg-background">
@@ -55,11 +59,25 @@ export function CodePreview({ children, code, title }: CodePreviewProps) {
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div>
         {showCode ? (
-          <pre className="text-sm overflow-x-auto">
-            <code className="text-foreground">{code}</code>
-          </pre>
+          <div className="relative overflow-hidden rounded-md code-preview">
+            <SyntaxHighlighter
+              language="tsx"
+              showLineNumbers
+              className="not-prose bg-transparent m-0 text-sm p-4"
+              style={oneLight}
+              customStyle={{
+                background: "transparent",
+                margin: 0,
+                fontSize: "0.875rem",
+                padding: "1rem",
+              }}
+              codeTagProps={{ style: { fontFamily: "monospace" } }}
+            >
+              {code}
+            </SyntaxHighlighter>
+          </div>
         ) : (
           <div className="flex items-center justify-center min-h-[200px]">
             {children}
@@ -67,5 +85,5 @@ export function CodePreview({ children, code, title }: CodePreviewProps) {
         )}
       </div>
     </div>
-  )
-} 
+  );
+}

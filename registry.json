@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "eddy-sims-registry",
+  "homepage": "https://registry.eddysims.com",
+  "items": [
+    {
+      "name": "star-rating",
+      "type": "registry:component",
+      "title": "Star Rating",
+      "description": "A customizable star rating component",
+      "files": [
+        {
+          "path": "registry/default/star-rating/star-rating.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+} 

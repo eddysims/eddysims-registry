@@ -1,6 +1,73 @@
 ---
 title: Star Rating
-description: Star Rating component
+description: A customizable star rating component with interactive hover states
 ---
 
-This is a star rating component.
+import { StarRatingDemo, StarRatingReadOnly, StarRatingSizes } from "@/components/star-rating-demo"
+import { CodePreviewServer } from "@/components/code-preview-server"
+import { InstallationServer } from "@/components/installation-server"
+
+
+
+## Installation
+
+<InstallationServer componentName="star-rating" />
+
+
+
+## Examples
+
+### Basic Usage
+
+<CodePreviewServer
+  title="Basic Star Rating"
+  filePath="components/star-rating-demo.tsx"
+  functionName="BasicExample"
+  componentName="StarRating"
+>
+  <StarRatingReadOnly value={3} />
+</CodePreviewServer>
+
+### Interactive Rating
+
+<CodePreviewServer
+  title="Interactive Star Rating"
+  filePath="components/star-rating-demo.tsx"
+  functionName="InteractiveExample"
+  componentName="StarRating"
+>
+  <StarRatingDemo />
+</CodePreviewServer>
+
+### Different Sizes
+
+<CodePreviewServer
+  title="Star Rating Sizes"
+  filePath="components/star-rating-demo.tsx"
+  functionName="SizesExample"
+  componentName="StarRating"
+>
+  <StarRatingSizes />
+</CodePreviewServer>
+
+### Custom Max Rating
+
+<CodePreviewServer
+  title="Custom Max Rating"
+  filePath="components/star-rating-demo.tsx"
+  functionName="CustomMaxExample"
+  componentName="StarRating"
+>
+  <StarRatingReadOnly value={7} max={10} />
+</CodePreviewServer>
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | Current rating value |
+| `onChange` | `(value: number) => void` | - | Callback when rating changes |
+| `max` | `number` | `5` | Maximum number of stars |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of the stars |
+| `readonly` | `boolean` | `false` | Whether the rating is read-only |
+| `className` | `string` | - | Additional CSS classes |
